@@ -1,0 +1,57 @@
+1. `shutil.copy()` and `shutil.copytree()` are both functions in the `shutil` module, but they serve different purposes:
+
+   - `shutil.copy(src, dst)`: This function is used to copy a single file from the source (`src`) to the destination (`dst`). It duplicates a specific file without considering directories.
+
+   - `shutil.copytree(src, dst)`: This function is used to recursively copy an entire directory tree from the source directory (`src`) to the destination directory (`dst`). It creates a new directory at the destination and copies all files and subdirectories from the source.
+
+2. The function used to rename files is `os.rename(src, dst)` from the `os` module. It takes the source file path (`src`) and the destination file path (`dst`) as arguments and renames the file.
+
+3. The difference between the delete functions in the `send2trash` and `shutil` modules is how they handle the deleted files:
+
+   - `shutil.rmtree(path)`: This function deletes an entire directory tree at the specified `path`, including all files and subdirectories. It permanently removes the data.
+
+   - `send2trash.send2trash(path)`: This function sends the file or directory at the specified `path` to the system's trash or recycle bin, depending on the operating system. This means the data is moved to the trash/recycle bin and can potentially be restored later if needed.
+
+4. The `ZipFile` method equivalent to File objects' `open()` method is `ZipFile(filename, mode)`. To create a new ZIP file or open an existing one, you use the `ZipFile` constructor, specifying the filename and the mode in which you want to access the ZIP file (e.g., `"w"` for write, `"r"` for read, `"a"` for append).
+
+5. Here's a Python program that searches a folder tree for files with a certain file extension and copies them to a new folder:
+
+```python
+import os
+import shutil
+
+def copy_files_with_extension(source_folder, destination_folder, extension):
+    for root, dirs, files in os.walk(source_folder):
+        for file in files:
+            if file.endswith(extension):
+                source_path = os.path.join(root, file)
+                destination_path = os.path.join(destination_folder, file)
+                shutil.copy(source_path, destination_path)
+
+source_folder = "source_folder_path"  # Replace with the path to the source folder
+destination_folder = "destination_folder_path"  # Replace with the path to the destination folder
+extension_to_copy = ".pdf"  # Specify the file extension you want to search for and copy
+
+copy_files_with_extension(source_folder, destination_folder, extension_to_copy)
+```
+
+Replace `"source_folder_path"`, `"destination_folder_path"`, and `".pdf"` with the appropriate values for your use case. This program will search for files with the specified extension (e.g., ".pdf") in the source folder and its subdirectories, then copy them to the destination folder.
+
+
+
+import os
+import shutil
+
+def copy_files_with_extension(source_folder, destination_folder, extension):
+    for root, dirs, files in os.walk(source_folder):
+        for file in files:
+            if file.endswith(extension):
+                source_path = os.path.join(root, file)
+                destination_path = os.path.join(destination_folder, file)
+                shutil.copy(source_path, destination_path)
+
+source_folder = "source_folder_path"  # Replace with the path to the source folder
+destination_folder = "destination_folder_path"  # Replace with the path to the destination folder
+extension_to_copy = ".pdf"  # Specify the file extension you want to search for and copy
+
+copy_files_with_extension(source_folder, destination_folder, extension_to_copy)
